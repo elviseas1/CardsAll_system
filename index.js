@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const session = require('express-session')
 const FileStore = require('session-file-store')(session)
 const flash = require('express-flash')
+const port = process.env.PORT || 3001;
 
 
 const app = express()
@@ -87,6 +88,7 @@ app.get('/', CardController.showCard)
 conn
     .sync(/*{ force: true }*/)
     .then(() => {
-        app.listen(3000)
+        //app.listen(3000)
+        app.listen(port, () => console.log(`Example app listening on port ${port}!`));
     })
     .catch((err) => console.log(err))
