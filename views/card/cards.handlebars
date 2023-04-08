@@ -1,0 +1,30 @@
+<div class="cards">
+    <div class="title-container">
+        <h2>Dashboard</h2>
+        <a href="/add" class="btn">Criar Cartão</a>
+    </div>
+   <table>
+    <tr>
+      <th>Código</th>
+      <th>Administrador</th>
+      <th>Cliente</th>
+      <th>Imagem</th>
+    </tr>
+    
+        {{#each returnCards}}
+             <tr>
+                <td><span class="label">{{this.codeCard}}</span></td>
+                <td><span class="label">{{this.codeCard}}</span></td>
+                <td></td>
+                <td><img src="{{this.qrcodeCode}}" alt="image" /></td>
+                
+            </tr>
+                
+
+            
+        {{/each}}
+    </ul>
+    {{#if emptyCards}}
+        <p>Ainda não há nenhum pensamento seu, comece a criar <a href="/add">por aqui!</a></p>
+    {{/if}}
+</div>
