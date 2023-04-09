@@ -14,7 +14,7 @@ const conn = require('./db/conn')
 const Address = require('./models/Address')
 const User = require('./models/User')
 const Card = require('./models/Card')
-const UserCard = require('./models/UserCard')
+//const UserCard = require('./models/UserCard')
 
 
 
@@ -59,7 +59,7 @@ app.use(
             secure: false,
             maxAge: 3600000,
             expires: new Date(Date.now() + 3600000),
-            httpOnly: true
+            httpOnly: true 
         }
     })
 )

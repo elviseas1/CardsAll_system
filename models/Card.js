@@ -2,6 +2,8 @@ const { DataTypes } = require('sequelize')
 
 const db = require('../db/conn')
 
+// Adress
+const User = require('./User')
 
 const Card = db.define('Card', { 
     codeCard: {
@@ -57,5 +59,8 @@ const Card = db.define('Card', {
         require: true,
     },
 })
+
+Card.belongsTo(User)
+User.hasMany(Card)
 
 module.exports = Card
