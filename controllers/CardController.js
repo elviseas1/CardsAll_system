@@ -1,5 +1,6 @@
 const Card = require('../models/Card')
-//const { Op } = require('sequelize')
+const User = require('../models/User')
+//const { op } = require('sequelize')
 const qrcode = require('qrcode')
 
 module.exports = class CardController {
@@ -9,15 +10,20 @@ module.exports = class CardController {
         
         var emptyCards =  true
 
-        const cards = await Card.findAll({ include: User })
+        const cards = await Card.findAll({include: [{model: User}]})
+        //const cards = await Card.findAll()
+
+        //  console.log("1" + cards)
 
         if(cards.length > 0){
             emptyCards = false
         }
 
-        const returnCards = cards.map((result) => result.dataValues)
+        var returnCards = cards.map((result) => result.dataValues)
 
-        console.log(returnCards)
+        returnCards = JSON.stringify(returnCards)
+
+        returnCards = JSON.parse(returnCards)
 
         res.render('card/cards', {returnCards, emptyCards})
     }
@@ -36,7 +42,7 @@ module.exports = class CardController {
         var countCode = 0
        // var qrCodeUrl = ''
 
-        console.log('Numero: ' + req.body.numberCard + ' User: ' + req.session.userid)
+        //console.log('Numero: ' + req.body.numberCard + ' User: ' + req.session.userid)
 
         for(var i = 0; i < req.body.numberCard; i++){
 
@@ -45,10 +51,10 @@ module.exports = class CardController {
             }
 
             const gerarQrCode = (codigo) => {
-                qrcode.toDataURL('http://localhost:3000/' + codigo, function (err, url) {
+                qrcode.toDataURL('http://c.cardsall.com.br/' + codigo, function (err, url) {
                     salvarCode(url)
                 })
-                console.log('Teste')
+                //console.log('Teste')
             }
 
             const salvarCode = async (url) => {
@@ -156,7 +162,7 @@ module.exports = class CardController {
 
             const returnCards = cards.map((result) => result.dataValues)
 
-            console.log(returnCards)
+            //console.log(returnCards)
 
             res.render('card/cards', {returnCards, emptyCards})
         // try{
