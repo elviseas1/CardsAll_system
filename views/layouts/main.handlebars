@@ -10,15 +10,19 @@
         <!-- BOOTSTAP ICONS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     </head>
+    
     <body>
         <nav id="navbar">
             <a href="/" id="logo">
                 <img src="/img/logo.png" alt="Card">
             </a>
             <ul>
-                <li><a href="/">Início</a></li>
+                
                 <!-- URL após autenticação -->
                 {{#if session.userid}}
+                    <li><a href="/">Início</a></li>
+                    <li><a href="/cardUser">Cartão</a></li>
+                    <li><a href="/clients">Cliente</a></li>
                     <li><a href="/cards">Cartões</a></li>
                     <li><a href="/logout">Sair</a></li>
                 {{else}}

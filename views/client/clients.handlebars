@@ -1,0 +1,37 @@
+<div class="home-header">
+
+    <div class="title-container">
+        <h2>Clientes</h2>
+        <a href="/addClient" class="btn">Criar Cliente</a>
+    </div>
+
+    <div>
+        <table>
+            <tr>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Usuário</th>
+            <th>Cartão</th>
+            <th>Editar</th>
+            <th>Vincular</th>
+            </tr>
+                {{#each returnClients}}
+                    <tr>
+                        <td><span class="label">{{id}}</span></td>
+                        <td><span class="label">{{name}}</span></td>
+                        <td><span class="label">{{userName}}</span></td>
+                        <td><span class="label">{{Cards.codeCard}}</span></td>
+                        <td><a href="/cardUser/{{id}}" class="btn">Editar</a></td>
+                        <td><a href="/addClientCard">Vincular Cartão</a></td>
+                    </tr>
+
+                {{/each}}
+            </ul>
+        </table>
+    </div>
+
+        {{#if emptyClients}}
+        <p>Ainda não há nenhum pensamento seu, comece a criar <a href="/clientadd">por aqui!</a></p>
+    {{/if}}
+
+</div>

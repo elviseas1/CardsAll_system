@@ -84,74 +84,10 @@ module.exports = class CardController {
             }
 
             gerarQrCode(codigo)
-           
-            
-
-            
-            
-
-
-
-            // const card = {
-            //     codeCard: codigo,
-            //     UserIdAdm: req.session.userid,
-            //     qrcodeCode: '',
-            // }
 
            
         }
-        /*
-        while(countCode < req.body.numberCard ){
-            function generateCode(){
-                return Math.floor(Math.random() * 999999 + 100000)
-            }
 
-            function gerarQrCode(codigo){
-                qrcode.toDataURL('http://localhost:3000/' + codigo, function (err, url) {
-                    console.log(url)
-                })
-            }
-
-            const codigo = generateCode()
-            const codeReturn = await Card.findOne({where: {codeCard: codigo}})
-
-
-            while (codeReturn) {
-                codigo = generateCode()
-                codeReturn = await Card.findOne({where: {codeCard: codigo}})               
-            }
-
-            gerarQrCode(codigo)
-            
-
-
-                const card = {
-                    codeCard: codigo,
-                    UserIdAdm: req.session.userid,
-                    qrcodeCode: '',
-                }
-
-            // try{
-            //     const createdCard = await Card.create(card)
-
-            //     req.flash('message', 'Cartão cadastro com sucesso!')
-
-            //     req.session.save(() => {
-            //         res.redirect('/')
-            //     })
-
-            // } catch(err) {
-            //     console.log(err)
-            // }
-
-
-            console.log(card)
-
-            countCode++
-
-            
-        }
-*/
             var emptyCards =  true
 
             const cards = await Card.findAll()
@@ -165,17 +101,7 @@ module.exports = class CardController {
             //console.log(returnCards)
 
             res.render('card/cards', {returnCards, emptyCards})
-        // try{
-        //     await Tought.create(tought)
 
-        //     req.flash('message', 'Pensamento criado com sucesso!')
-
-        //     req.session.save(() => {
-        //         res.redirect('/toughts/dashboard')
-        //     })
-        // }catch (error) {
-        //     console.log('aconteceu um erro' + error)
-        // }
     }
  
  

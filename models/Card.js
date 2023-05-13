@@ -10,7 +10,15 @@ const Card = db.define('Card', {
         type: DataTypes.STRING,
         require: true,
     },
+    cor: {
+        type: DataTypes.STRING,
+        require: false,
+    },
     name: {
+        type: DataTypes.STRING,
+        require: false,
+    },
+    profissao: {
         type: DataTypes.STRING,
         require: false,
     },
@@ -23,6 +31,10 @@ const Card = db.define('Card', {
         require: false,
     },
     whatsapp: {
+        type: DataTypes.STRING,
+        require: false
+    },
+    site: {
         type: DataTypes.STRING,
         require: false
     },
@@ -61,6 +73,7 @@ const Card = db.define('Card', {
 })
 
 Card.belongsTo(User)
-User.hasMany(Card)
+User.hasMany(Card) 
+
 
 module.exports = Card

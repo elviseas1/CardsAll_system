@@ -14,6 +14,7 @@ const conn = require('./db/conn')
 const Address = require('./models/Address')
 const User = require('./models/User')
 const Card = require('./models/Card')
+//const CardUser = require('./models/cardUser')
 //const UserCard = require('./models/UserCard')
 
 
@@ -21,12 +22,13 @@ const Card = require('./models/Card')
 // Import Routes
 const cardRoutes = require('./routes/cardRoutes')
 const authRoutes = require('./routes/authRoutes')
- 
-
+const clientRoutes = require('./routes/clientRoutes')
+const cardUserRoutes = require('./routes/cardUserRoutes')
+//const cardUserQrCode = require('./routes/cardUserRoutes')
 
 // Import Controller
 const CardController = require('./controllers/CardController')
-
+const cardUserQrCodeController = require('./controllers/cardUserQrCodeController')
 
 
 // template enine
@@ -82,11 +84,14 @@ app.use(express.static('public'))
 // Routes
 app.use('/', cardRoutes)
 app.use('/', authRoutes)
+app.use('/', clientRoutes)
+app.use('/', cardUserRoutes)
 
 app.get('/', CardController.showCard)
+app.get('/:code', cardUserQrCodeController.showCardUserQrCode)
 
 conn
-    .sync(/*{ force: true }*/)
+    .sync(/*{ force: true }*/) 
     .then(() => {
         //app.listen(3000)
         app.listen(port, () => console.log(`Example app listening on port ${port}!`));
