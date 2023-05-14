@@ -51,7 +51,7 @@ module.exports = class CardController {
             }
 
             const gerarQrCode = (codigo) => {
-                qrcode.toDataURL('http://c.cardsall.com.br/' + codigo, function (err, url) {
+                qrcode.toDataURL('https://c.cardsall.com.br/' + codigo, function (err, url) {
                     salvarCode(url)
                 })
                 //console.log('Teste')

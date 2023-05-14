@@ -21,13 +21,18 @@
                 <!-- URL após autenticação -->
                 {{#if session.userid}}
                     <li><a href="/">Início</a></li>
+                    <li></li>
                     <li><a href="/cardUser">Cartão</a></li>
+                    <li></li>
                     <li><a href="/clients">Cliente</a></li>
+                    <li></li>
                     <li><a href="/cards">Cartões</a></li>
+                    <li></li>
+                    <li><a href="/register">Registrar</a></li>
+                    <li></li>
                     <li><a href="/logout">Sair</a></li>
                 {{else}}
                     <li><a href="/login">Entrar</a></li>
-                    <li><a href="/register">Registrar</a></li>
                 {{/if}}
                 
             </ul>
