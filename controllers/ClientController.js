@@ -15,8 +15,8 @@ module.exports = class ClientController {
            where: {acesso: 1},
             include: [{
                 model: Card,
-                required: true,
-               // attributes: ['codCard']
+                required: false,
+                //attributes: ['codeCard']
             }]
         })
 
@@ -26,15 +26,17 @@ module.exports = class ClientController {
             emptyClients = false
         }
 
+        //console.log('Aqui: ' + JSON.stringify(clients))
+
         var returnClients = clients.map((result) => result.dataValues)
 
         returnClients = JSON.stringify(returnClients)
 
         returnClients = JSON.parse(returnClients)
 
-        // console.log('Aqui: ' + JSON.stringify(returnClients))
+        //console.log('Aqui: ' + JSON.stringify(returnClients))
 
-        res.render('client/clients', {returnClients, emptyClients})
+        res.render('client/clients', {returnClients, emptyClients}) 
     }
 
     static createClient(req, res){

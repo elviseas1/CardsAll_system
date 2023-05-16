@@ -48,7 +48,7 @@ module.exports = class AuthController {
 
     static async registerPost(req, res){
 
-        const  { name, email, cpf, useRegister, password, confirmpassword } = req.body
+        const  { name, email, cpf, acesso,useRegister, password, confirmpassword } = req.body
 
 
         // password match validation
@@ -79,6 +79,7 @@ module.exports = class AuthController {
             name,
             email,
             cpf,
+            acesso: acesso,
             userName,
             password: hashedPassword,
         }
@@ -105,6 +106,9 @@ module.exports = class AuthController {
         req.session.destroy()
         res.redirect('/login')
     }
+
+
+
 
 
 }

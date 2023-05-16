@@ -1,6 +1,6 @@
 const Card = require('../models/Card')
 const User = require('../models/User')
-
+const bcrypt = require('bcryptjs')
 
 module.exports = class CardUserController {
 
@@ -76,6 +76,75 @@ module.exports = class CardUserController {
             console.log('Aconteceu um erro: ' + error)
         }
 
+    }
+
+
+    static loginQrCode(req, res) {
+        const id = req.params.id
+
+        console.log(id)
+
+        res.render('user/loginQrCodes', {id})
+    }
+
+    static async loginQrCodePost(req, res) {
+        const {userLogin, password, id } = req.body
+
+        
+
+        // find user
+        const userReturn = await User.findOne({where: {userName: userLogin}})
+
+        if (!userReturn) {
+            req.flash('message', 'Usuário não encontrado!')
+            res.render('user/loginQrCodes', {id})
+
+            return
+        }
+
+        // check if password match
+        const passwordMatch = bcrypt.compareSync(password, userReturn.password)
+
+        if (!passwordMatch) {
+            req.flash('message', 'Senha invalida!')
+            rres.render('user/loginQrCodes', {id})
+
+            return
+        }
+
+        const userCard = await Card.findOne({where: {UserId: userReturn.id }})
+
+        console.log('Card: ' + userCard.UserId + userReturn.id)
+        
+        if(userCard.UserId){
+            req.flash('message', 'Usuario já vinculado a um cartão!')
+            res.render('user/loginQrCodes', {id})
+
+            return
+        }
+        // initialize session
+        req.session.userid = userReturn.id
+
+        const cardUserDate = {
+            UserId: userReturn.id
+        }
+        
+
+        try {
+            await Card.update(cardUserDate, {where: { codeCard: id }})
+
+            req.flash('message', 'Dados do cartão atualizado com sucesso!')
+
+            req.session.save(() => {
+                res.redirect(`/cardUser/${userReturn.id}`)
+            })
+        } catch (error) {
+            console.log('Aconteceu um erro: ' + error)
+        }
+
+        // req.session.save(() => {
+        //     res.redirect('/')
+        // })
     }
 
 }
